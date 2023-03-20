@@ -1,0 +1,58 @@
+using System;
+
+class Triangulo {
+    private double a, b, c;
+
+    public Triangulo(double a, double b, double c) {
+        if (a <= 0 || b <= 0 || c <= 0) {
+            throw new ArgumentException("Os valores devem ser maiores do que zero.");
+        }
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+
+    public string ClassificarTriangulo() {
+        if (a >= b + c) {
+            return "NAO FORMA TRIANGULO";
+        }
+        if (Math.Pow(a, 2) == Math.Pow(b, 2) + Math.Pow(c, 2)) {
+            return "TRIANGULO RETANGULO";
+        }
+        if (Math.Pow(a, 2) > Math.Pow(b, 2) + Math.Pow(c, 2)) {
+            return "TRIANGULO OBTUSANGULO";
+        }
+        if (Math.Pow(a, 2) < Math.Pow(b, 2) + Math.Pow(c, 2)) {
+            return "TRIANGULO ACUTANGULO";
+        }
+        if (a == b && b == c) {
+            return "TRIANGULO EQUILATERO";
+        }
+        if (a == b || b == c || c == a) {
+            return "TRIANGULO ISOSCELES";
+        }
+        return "";
+    }
+}
+
+class Program {
+    static void Main(string[] args) {
+        double a, b, c;
+
+        Console.Write("Digite o valor de A: ");
+        a = double.Parse(Console.ReadLine());
+
+        Console.Write("Digite o valor de B: ");
+        b = double.Parse(Console.ReadLine());
+
+        Console.Write("Digite o valor de C: ");
+        c = double.Parse(Console.ReadLine());
+
+        try {
+            Triangulo triangulo = new Triangulo(a, b, c);
+            Console.WriteLine(triangulo.ClassificarTriangulo());
+        } catch (ArgumentException e) {
+            Console.WriteLine(e.Message);
+        }
+    }
+}
